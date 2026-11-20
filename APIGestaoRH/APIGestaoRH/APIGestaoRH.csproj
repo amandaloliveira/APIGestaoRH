@@ -1,19 +1,36 @@
+<!-- =========================================================================================
+     ARQUIVO DE PROJETO (.csproj) - Configuração do SDK, Versão do .NET e Pacotes NuGet
+     Conceitos abordados neste arquivo:
+     [1] ORM com Entity Framework Core (pacotes Microsoft.EntityFrameworkCore.Sqlite e Tools)
+     ========================================================================================= -->
+
+<!-- Define que este projeto é uma aplicação Web ASP.NET Core usando o SDK padrão da Microsoft -->
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
-	<PropertyGroup>
-		<TargetFramework>net10.0</TargetFramework>
-		<Nullable>enable</Nullable>
-		<ImplicitUsings>enable</ImplicitUsings>
-	</PropertyGroup>
+  <!-- Grupo de propriedades fundamentais de compilação do projeto -->
+  <PropertyGroup>
+    <!-- Define a versão alvo do runtime (.NET 10) -->
+    <TargetFramework>net10.0</TargetFramework>
+    <!-- Habilita a análise estática de tipos anuláveis (evita NullReferenceException) -->
+    <Nullable>enable</Nullable>
+    <!-- Importa automaticamente namespaces básicos do C# e ASP.NET (System, Microsoft.AspNetCore, etc.) -->
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
 
-	<ItemGroup>
-		<!-- Gera a documentação OpenAPI e a interface do Swagger (/swagger) -->
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.14" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.14">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="10.2.3" />
-	</ItemGroup>
+  <!-- Grupo de dependências externas (pacotes NuGet) instaladas no projeto -->
+  <ItemGroup>
+    <!-- [1] Provedor do ORM Entity Framework Core para banco de dados SQLite -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.14" />
+
+    <!-- [1] Ferramentas de linha de comando e Package Manager Console do EF Core (Add-Migration, Update-Database) -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.14">
+      <!-- Indica que este pacote é usado apenas em tempo de desenvolvimento/compilação, não vai para publicação -->
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+
+    <!-- Biblioteca Swashbuckle que gera a documentação OpenAPI e a interface visual do Swagger (/swagger) -->
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="10.2.3" />
+  </ItemGroup>
 
 </Project>

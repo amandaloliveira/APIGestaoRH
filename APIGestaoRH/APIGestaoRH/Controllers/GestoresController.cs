@@ -1,31 +1,46 @@
-﻿using APIGestaoRH.Models;
+﻿// =========================================================================================
+// CONTROLLER REST DE GESTORES (Controllers/GestoresController.cs)
+// Conceitos abordados neste arquivo:
+// [2] Camada Controller (expõe endpoints CRUD para o lado "1" do relacionamento 1:N)
+// [3] Injeção de Dependência (recebe IGestorService via construtor)
+// [4] Relacionamento 1 para Muitos (1:N) — exibe cada gestor junto com sua lista de funcionários
+// [5] Processamento Assíncrono (actions async Task<...>)
+// =========================================================================================
+
+// Importa a entidade Gestor
+using APIGestaoRH.Models;
+// Importa o contrato IGestorService e RegraDeNegocioException
 using APIGestaoRH.Services;
+// Importa recursos WebAPI do ASP.NET Core
 using Microsoft.AspNetCore.Mvc;
 
+// Define o namespace da camada de controllers
 namespace APIGestaoRH.Controllers;
 
 /// <summary>
-/// O "garçom": recebe a requisição, chama o serviço e escolhe a resposta HTTP.
+/// [2] O "garçom": gerencia as requisições HTTP referentes aos Gestores (lado 1 do relacionamento 1:N).
 /// </summary>
 [Route("api/[controller]")]
 [ApiController]
 public class GestoresController : ControllerBase
 {
+    // Dependência abstrata do serviço de gestores
     private readonly IGestorService _servico;
 
+    // [3] Injeção de Dependência: recebe IGestorService do contêiner IoC
     public GestoresController(IGestorService servico)
     {
         _servico = servico;
     }
 
-    // GET: api/Gestores
+    // [4] [5] Endpoint GET: api/Gestores -> Lista todos os gestores e seus funcionários subordinados (HTTP 200)
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Gestor>>> GetGestores()
     {
         return Ok(await _servico.ListarAsync());
     }
 
-    // GET: api/Gestores/1
+    // [4] [5] Endpoint GET: api/Gestores/{id} -> Obtém um gestor específico e sua equipe (200 ou 404)
     [HttpGet("{id}")]
     public async Task<ActionResult<Gestor>> GetGestor(int id)
     {
@@ -33,13 +48,13 @@ public class GestoresController : ControllerBase
 
         if (gestor is null)
         {
-            return NotFound(); // null -> 404
+            return NotFound(); // null -> HTTP 404
         }
 
         return Ok(gestor);
     }
 
-    // POST: api/Gestores
+    // [5] Endpoint POST: api/Gestores -> Cadastra um novo gestor (201 Created ou 400 BadRequest)
     [HttpPost]
     public async Task<ActionResult<Gestor>> PostGestor(Gestor gestor)
     {
@@ -50,11 +65,11 @@ public class GestoresController : ControllerBase
         }
         catch (RegraDeNegocioException ex)
         {
-            return BadRequest(ex.Message); // regra quebrada -> 400
+            return BadRequest(ex.Message); // e-mail duplicado -> HTTP 400
         }
     }
 
-    // PUT: api/Gestores/1
+    // [5] Endpoint PUT: api/Gestores/{id} -> Atualiza os dados de um gestor (204, 400 ou 404)
     [HttpPut("{id}")]
     public async Task<IActionResult> PutGestor(int id, Gestor gestorAtualizado)
     {
@@ -64,7 +79,7 @@ public class GestoresController : ControllerBase
 
             if (!atualizado)
             {
-                return NotFound(); // false -> 404
+                return NotFound(); // false -> HTTP 404
             }
 
             return NoContent();
@@ -75,7 +90,7 @@ public class GestoresController : ControllerBase
         }
     }
 
-    // DELETE: api/Gestores/1
+    // [4] [5] Endpoint DELETE: api/Gestores/{id} -> Remove um gestor sem funcionários vinculados (204, 400 ou 404)
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteGestor(int id)
     {
@@ -85,14 +100,15 @@ public class GestoresController : ControllerBase
 
             if (!removido)
             {
-                return NotFound(); // false -> 404
+                return NotFound(); // false -> HTTP 404
             }
 
             return NoContent();
         }
         catch (RegraDeNegocioException ex)
         {
-            return BadRequest(ex.Message); // possui funcionários vinculados -> 400
+            // Se o gestor ainda possuir funcionários (1:N), retorna HTTP 400 com a explicação
+            return BadRequest(ex.Message);
         }
     }
 }
