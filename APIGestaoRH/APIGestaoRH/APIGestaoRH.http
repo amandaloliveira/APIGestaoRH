@@ -1,13 +1,6 @@
-# =========================================================================================
-# ARQUIVO DE TESTES HTTP (APIGestaoRH.http)
-# Permite testar diretamente no Visual Studio / VS Code todos os endpoints REST da API
-# demonstrando o Relacionamento 1:N (Gestor -> Funcionários) e o Processamento Assíncrono.
-# =========================================================================================
-
-# Variável base com o endereço local onde a API sobe em HTTP
 @host = http://localhost:5135
 
-### 1. [POST] Cadastrar um Gestor (lado 1 do relacionamento 1:N - deve ser criado primeiro)
+### 1. Cadastrar um Gestor (lado 1 do relacionamento 1:N)
 POST {{host}}/api/Gestores
 Content-Type: application/json
 
@@ -17,11 +10,11 @@ Content-Type: application/json
   "email": "ricardo.almeida@empresa.com"
 }
 
-### 2. [GET] Listar Gestores (retorna cada gestor acompanhado da lista de seus funcionários via .Include)
+### 2. Listar Gestores (mostra o gestor e sua lista de funcionários)
 GET {{host}}/api/Gestores
 Accept: application/json
 
-### 3. [POST] Cadastrar um Funcionário vinculado ao Gestor Id 1 (lado N do relacionamento 1:N)
+### 3. Cadastrar um Funcionário vinculado ao Gestor Id 1
 POST {{host}}/api/Funcionarios
 Content-Type: application/json
 
@@ -34,19 +27,19 @@ Content-Type: application/json
   "gestorId": 1
 }
 
-### 4. [GET] Listar todos os funcionários registrados no banco SQLite
+### 4. Listar todos os funcionários registrados
 GET {{host}}/api/Funcionarios
 Accept: application/json
 
-### 5. [GET] Listar um funcionário específico pelo Id
+### 5. Listar um funcionário específico pelo Id
 GET {{host}}/api/Funcionarios/1
 Accept: application/json
 
-### 6. [GET] Listar funcionários de um setor específico
+### 6. Listar funcionários de um setor específico
 GET {{host}}/api/Funcionarios/setor/Tecnologia
 Accept: application/json
 
-### 7. [PUT] Alterar dados do funcionário (cargo, salário ou setor)
+### 7. Alterar dados do funcionário (cargo, salário ou setor)
 PUT {{host}}/api/Funcionarios/1
 Content-Type: application/json
 
@@ -59,18 +52,5 @@ Content-Type: application/json
   "gestorId": 1
 }
 
-### 8. [DELETE] Remover o funcionário do banco de dados
+### 8. Remover o funcionário do banco de dados
 DELETE {{host}}/api/Funcionarios/1
-
-### 9. [PUT] Alterar dados de um Gestor
-PUT {{host}}/api/Gestores/1
-Content-Type: application/json
-
-{
-  "nome": "Ricardo Almeida",
-  "setor": "Engenharia de Software",
-  "email": "ricardo.almeida@empresa.com"
-}
-
-### 10. [DELETE] Remover um Gestor (retorna 400 se ainda tiver funcionários vinculados, ou 204 se estiver livre)
-DELETE {{host}}/api/Gestores/1
