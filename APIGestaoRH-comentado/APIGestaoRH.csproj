@@ -1,19 +1,19 @@
-<Project Sdk="Microsoft.NET.Sdk.Web"> <!-- Define o SDK web do .NET para aplicações ASP.NET Core -->[cite: 25]
+<Project Sdk="Microsoft.NET.Sdk.Web"> <!-- Define o SDK web do .NET para aplicações ASP.NET Core -->
 
-	<PropertyGroup> <!-- Abre o grupo de propriedades gerais de compilação do projeto -->[cite: 25]
-		<TargetFramework>net10.0</TargetFramework> <!-- Define o .NET 10.0 como framework de destino -->[cite: 25]
-		<Nullable>enable</Nullable> <!-- Ativa o contexto de tipos de referência anuláveis (nullable reference types) -->[cite: 25]
-		<ImplicitUsings>enable</ImplicitUsings> <!-- Ativa as diretivas using implícitas padrão do .NET -->[cite: 25]
-	</PropertyGroup> <!-- Fecha PropertyGroup -->[cite: 25]
+	<PropertyGroup> <!-- Abre o grupo de propriedades gerais de compilação do projeto -->
+		<TargetFramework>net10.0</TargetFramework> <!-- Define o .NET 10.0 como framework de destino -->
+		<Nullable>enable</Nullable> <!-- Ativa o contexto de tipos de referência anuláveis (nullable reference types) -->
+		<ImplicitUsings>enable</ImplicitUsings> <!-- Ativa as diretivas using implícitas padrão do .NET -->
+	</PropertyGroup> <!-- Fecha PropertyGroup -->
 
-	<ItemGroup> <!-- Abre o grupo de itens e referências de pacotes NuGet -->[cite: 25]
-		<!-- Gera a documentação OpenAPI e a interface do Swagger (/swagger) --> <!-- Comentário descritivo no ficheiro de projeto -->[cite: 25]
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.14" /> <!-- Adiciona o provedor SQLite para o Entity Framework Core na versão 10.0.14 -->[cite: 25]
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.14"> <!-- Adiciona as ferramentas CLI do EF Core (como dotnet ef migrations) na versão 10.0.14 -->[cite: 25]
-			<PrivateAssets>all</PrivateAssets> <!-- Impede que este pacote seja exposto transitivamente a outros projetos dependentes -->[cite: 25]
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets> <!-- Especifica quais fases/ativos de compilação utilizam este pacote -->[cite: 25]
-		</PackageReference> <!-- Fecha PackageReference de Microsoft.EntityFrameworkCore.Tools -->[cite: 25]
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="10.2.3" /> <!-- Adiciona o Swashbuckle para geração OpenAPI e Swagger UI na versão 10.2.3 -->[cite: 25]
-	</ItemGroup> <!-- Fecha ItemGroup -->[cite: 25]
+	<ItemGroup> <!-- Abre o grupo de itens e referências de pacotes NuGet -->
+		<!-- Gera a documentação OpenAPI e a interface do Swagger (/swagger) --> <!-- Comentário descritivo no ficheiro de projeto -->
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.14" /> <!-- Adiciona o provedor SQLite para o Entity Framework Core na versão 10.0.14 -->
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.14"> <!-- Adiciona as ferramentas CLI do EF Core (como dotnet ef migrations) na versão 10.0.14 -->
+			<PrivateAssets>all</PrivateAssets> <!-- Impede que este pacote seja exposto transitivamente a outros projetos dependentes -->
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets> <!-- Especifica quais fases/ativos de compilação utilizam este pacote -->
+		</PackageReference> <!-- Fecha PackageReference de Microsoft.EntityFrameworkCore.Tools -->
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="10.2.3" /> <!-- Adiciona o Swashbuckle para geração OpenAPI e Swagger UI na versão 10.2.3 -->
+	</ItemGroup> <!-- Fecha ItemGroup -->
 
-</Project> <!-- Fecha o elemento raiz Project -->[cite: 25]
+</Project> <!-- Fecha o elemento raiz Project -->
