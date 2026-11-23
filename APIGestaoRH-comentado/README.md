@@ -1,7 +1,5 @@
 # APIGestaoRH — Arquitetura em Camadas (.NET 10 + EF Core)
 
-Projeto de API REST para **Gestão de RH** baseado na estrutura `v3-camada-servico`, com todos os arquivos de código comentados linha a linha explicando o funcionamento e os 5 pilares arquiteturais abaixo:
-
 ## 1. ORM com Entity Framework Core
 - **Onde está:** `APIGestaoRH.csproj`, `appsettings.json`, `Program.cs`, `Data/AppDbContext.cs`, `Data/*RepositoryEf.cs` e `Migrations/`.
 - **Como funciona:** Mapeia as classes C# (`Gestor` e `Funcionario`) para tabelas no SQLite (`gestaorh.db`) e converte consultas LINQ (`ToListAsync`, `FindAsync`, `Where`, `AnyAsync`, `Include`) em comandos SQL nativos.
