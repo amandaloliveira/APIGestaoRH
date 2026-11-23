@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?> <!-- Declaração XML com codificação UTF-8 -->
-<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003"> <!-- Elemento raiz do arquivo de configuração de usuário do MSBuild -->
-  <PropertyGroup> <!-- Grupo de propriedades específicas do usuário para o projeto -->
-    <ActiveDebugProfile>https</ActiveDebugProfile> <!-- Define o perfil "https" como o perfil de depuração ativo por padrão -->
-  </PropertyGroup> <!-- Fecha PropertyGroup -->
-</Project> <!-- Fecha o elemento raiz Project -->
